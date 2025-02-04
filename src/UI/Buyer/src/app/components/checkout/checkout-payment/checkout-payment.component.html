@@ -225,7 +225,10 @@
   </div>
 
   <!-- Add validation for the checkbox -->
-  <p *ngIf="!agreedToTerms && !isSitecorian" class="error-text">
+  <p
+    *ngIf="!agreedToTerms && !isSitecorian && containsSubscriptions"
+    class="error-text"
+  >
     You must agree to the terms and conditions before submitting your order.
   </p>
 
@@ -237,7 +240,7 @@
     [disabled]="
       !selectedBillingAddress ||
       (poUploadSuccess === false && !isSitecorian) ||
-      (!agreedToTerms && !isSitecorian)
+      (!agreedToTerms && !isSitecorian && containsSubscriptions)
     "
   >
     Submit Order
