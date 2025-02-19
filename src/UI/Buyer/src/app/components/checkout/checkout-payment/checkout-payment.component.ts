@@ -103,7 +103,6 @@ export class OCMCheckoutPayment implements OnInit {
     const lineItems = this.context.order.getLineItems()
     lineItems.Items.forEach((line) => {
       if (line?.Product?.xp?.isSubscription && line.UnitPrice > 0) {
-        this.disableCC = true
         this.containsSubscriptions = true
       }
     })
@@ -129,11 +128,6 @@ export class OCMCheckoutPayment implements OnInit {
     }
   }
 
-  async onTermsChecked(event: any): Promise<void> {
-    const flag = event.target.checked as boolean
-    await this.context.order.checkout.subscriptionAcknowledgment(flag)
-    this.agreedToTerms = flag
-  }
 
   getAcceptedPaymentMethods(): string[] {
     if (
@@ -213,8 +207,8 @@ export class OCMCheckoutPayment implements OnInit {
         this.poOnlyOrder = true
         this.disableCC = true
       } else {
-        if (_order.Total > 0 && !this.disableCC) {
-          //this.disableCC = false
+        if (_order.Total > 0 ) {
+          this.disableCC = false
           this.stripeCountry.emit(this.selectedBillingAddress)
         } else {
           this.selectedPaymentMethod = this

@@ -55,16 +55,6 @@
       for further assistance.</span
     >
   </div>
-  <div class="alert alert-warning" role="alert" *ngIf="containsSubscriptions">
-    <span
-      >Credit card purchase functionality for select products is unavailable. We
-      apologize for any inconvenience. Please submit a Purchase Order or contact
-      <a href="mailto:GlobalTraining@Sitecore.com" target="_blank"
-        >GlobalTraining@Sitecore.com</a
-      >
-      for further assistance.</span
-    >
-  </div>
   <ng-container
     *ngIf="
       orderSummaryMeta.LineItemCount &&
@@ -201,37 +191,11 @@
       *ngIf="
         orderSummaryMeta.LineItemCount &&
         selectedPaymentMethod === 'CreditCard' &&
-        order.Total > 0 &&
-        !disableCC
+        order.Total > 0
       "
       [billingAddressCountry]="stripeCountry"
     ></ocm-stripe-payment>
   </div>
-  <!-- add terms and conditions here -->
-  <div *ngIf="disableCC && containsSubscriptions" class="alert alert-info">
-    <p class="disclaimer-text">
-      By purchasing a Sitecore learning subscription, I acknowledge that I will
-      be charged a recurring fee every 12 months from the purchase date, unless
-      I cancel within 90 days of the renewal. To cancel, I must send a written
-      request to globaltraining@sitecore.com with my intent to cancel. In the
-      absence of a termination notice, the contract shall be renewed under the
-      same terms and conditions. I understand that by checking this box, I agree
-      to these terms.
-    </p>
-    <label>
-      <input type="checkbox" (change)="onTermsChecked($event)" />
-      I agree to the terms and conditions.
-    </label>
-  </div>
-
-  <!-- Add validation for the checkbox -->
-  <p
-    *ngIf="!agreedToTerms && !isSitecorian && containsSubscriptions"
-    class="error-text"
-  >
-    You must agree to the terms and conditions before submitting your order.
-  </p>
-
   <button
     type="submit"
     (click)="onContinue()"
@@ -239,8 +203,7 @@
     class="btn btn-primary btn-block-xs mt-4 mr-2"
     [disabled]="
       !selectedBillingAddress ||
-      (poUploadSuccess === false && !isSitecorian) ||
-      (!agreedToTerms && !isSitecorian && containsSubscriptions)
+      (poUploadSuccess === false && !isSitecorian)
     "
   >
     Submit Order
