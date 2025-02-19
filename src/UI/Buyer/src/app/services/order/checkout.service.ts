@@ -131,20 +131,6 @@ export class CheckoutService {
     return await this.paymentHelper.ListPaymentsOnOrder(this.order.ID)
   }
 
-  //subscription acknowledgement
-  async subscriptionAcknowledgment(flag: boolean): Promise<void> {
-    const patch = { xp: { SubscriptionTermsAccepted: flag } }
-    try {
-      this.order = await this.patch(patch as HSOrder)
-    } catch (ex) {
-      if (ex.errors.Errors[0].ErrorCode === 'NotFound') {
-        if (ex?.errors?.Errors?.[0]?.Data.ObjectType === 'Order') {
-          throw Error('You no longer have access to this order')
-        }
-        throw Error(ex)
-      }
-    }
-  }
 
   // Integration Methods
   // order cloud sandbox service methods, to be replaced by updated sdk in the future
