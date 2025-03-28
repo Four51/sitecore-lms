@@ -889,7 +889,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   async updateHSProduct(
     superHSProduct: SuperHSProduct
   ): Promise<SuperHSProduct> {
-    // If PriceSchedule has a price break price, but no ID or name, set them
+    // If PriceSchedule has a price break price, but no ID or name, set them!
     if (
       superHSProduct.PriceSchedule?.PriceBreaks[0]?.Price &&
       superHSProduct.PriceSchedule.ID === null
