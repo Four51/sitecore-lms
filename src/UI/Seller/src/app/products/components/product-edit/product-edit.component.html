@@ -563,7 +563,7 @@
               <div class="col-md-5">
                 <h5 translate>ADMIN.PRODUCT_EDIT.PRODUCT_IMAGES</h5>
                 <p class="font-italic" translate>
-                  ADMIN.PRODUCT_EDIT.PRODUCT_IMAGES_DESC
+                  Click the icon to upload images to your product to display on the buyer site.
                 </p>
               </div>
               <div class="col-md-7">
@@ -591,7 +591,6 @@
                       </span>
                     </div>
                     <div
-                      *ngIf="!readonly"
                       class="product-img-delete text-center"
                     >
                       <button
@@ -654,7 +653,6 @@
                     </div>
                   </div>
                   <label
-                    *ngIf="!readonly"
                     class="rmpm dropzone"
                     for="imageUpload"
                     appDrag
@@ -662,12 +660,11 @@
                   >
                   </label>
                   <input
-                    [disabled]="readonly"
                     class="d-none"
                     id="imageUpload"
                     type="file"
                     (change)="manualFileUpload($event, 'image')"
-                    multiple
+                    
                   />
                 </div>
               </div>
@@ -824,9 +821,7 @@
           class="btn btn-primary"
           type="submit"
           [disabled]="
-            (productForm?.status === 'INVALID' && productForm?.controls.Description.pristine) ||
-            !variantsValid ||
-            !specsValid ||
+            (productForm?.status === 'INVALID' && productForm?.controls.Description.pristine && !imageFiles ) ||
             dataIsSaving
           "
           (click)="handleSave()"

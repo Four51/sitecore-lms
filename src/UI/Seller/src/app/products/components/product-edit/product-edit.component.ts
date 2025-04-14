@@ -908,12 +908,17 @@ export class ProductEditComponent implements OnInit, OnDestroy {
     if (!superHSProduct.PriceSchedule)
       superHSProduct.PriceSchedule = null
     superHSProduct.Product.xp.Status = 'Draft'
-    if (this.imageFiles.length > 0) {
+    if (this.imageFiles.length > 0) { // checks if we need to replace the current image.
+        if (superHSProduct.Product.xp.Images.length && !superHSProduct.Product.xp.Images[0].Url.startsWith("https://cdn5.dcbstatic.com")){ //does not remove 
+          try {
+            this.removeFile(superHSProduct.Product.xp.Images[0], "image") // may fail due to no docebo cdn images in azure
+          } catch {
+          }
+        }
       const imgAssets = await this.assetService.uploadImageFiles(
         this.imageFiles
       )
       superHSProduct.Product.xp.Images = [
-        ...(superHSProduct.Product.xp?.Images || []),
         ...imgAssets,
       ]
     }
