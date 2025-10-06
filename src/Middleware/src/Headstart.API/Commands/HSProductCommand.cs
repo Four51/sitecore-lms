@@ -29,7 +29,9 @@ namespace Headstart.API.Commands.Crud
 		Task<Product> FilterOptionOverride(string id, string supplierID, IDictionary<string, object> facets, DecodedToken decodedToken);
 		Task<List<HSPriceSchedule>> ListAllPriceSchedules(string id, string token);
 		Task<bool> CheckProductCategory(string id);
-	}
+		Task<PriceSchedule> PostPriceBreakOverride(string id, PriceSchedule price, string accessToken);
+
+    }
 
 	public class DefaultOptionSpecAssignment
 	{
@@ -473,7 +475,12 @@ namespace Headstart.API.Commands.Crud
 
 		}
 
-		private bool HasVariantChange(Variant variant, Variant currVariant)
+        public async Task<PriceSchedule> PostPriceBreakOverride(string id, PriceSchedule priceBreak, string accessToken)
+		{
+			return await _oc.PriceSchedules.SavePriceBreakAsync(id, priceBreak.PriceBreaks.FirstOrDefault(), accessToken);
+		}
+
+        private bool HasVariantChange(Variant variant, Variant currVariant)
 		{
 			if (variant.Active != currVariant.Active) { return true; }
 			if (variant.Description != currVariant.Description) { return true; }

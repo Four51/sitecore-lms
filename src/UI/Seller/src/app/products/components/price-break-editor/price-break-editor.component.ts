@@ -12,6 +12,9 @@ import { SupportedRates } from '@app-seller/models/currency-geography.types'
 import { FormBuilder } from '@angular/forms'
 import { TypedFormGroup } from 'ngx-forms-typed'
 import { NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap'
+import { MiddlewareAPIService } from '@app-seller/shared/services/middleware-api/middleware-api.service'
+import { HeadStartSDK } from '@ordercloud/headstart-sdk'
+
 
 interface SalePriceFormValue {
   saleStartDate: Date
@@ -76,7 +79,9 @@ export class PriceBreakEditor {
 
   constructor(
     private toasterService: ToastrService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private middleware: MiddlewareAPIService,
+
   ) {}
 
   getEmptyBreak(): PriceBreak {
@@ -167,8 +172,18 @@ export class PriceBreakEditor {
     index: number,
     field: string
   ): void {
-    const value = event.target.value
-    this.priceScheduleEditable.PriceBreaks[index][field] = parseFloat(value)
+    if (
+      !this.priceScheduleEditable ||
+      !this.priceScheduleEditable.PriceBreaks ||
+      !this.priceScheduleEditable.PriceBreaks[index] ||
+      !field ||
+      !(field in this.priceScheduleEditable.PriceBreaks[index])
+    ) {
+        console.warn('Invalid update attempt:', { index, field });
+        return;
+      }
+    const value = parseFloat(event.target.value);
+    this.priceScheduleEditable.PriceBreaks[index][field] = value;
     this.emitUpdatedSchedule()
   }
 
@@ -209,6 +224,17 @@ export class PriceBreakEditor {
     this.isAddingPriceBreak = false
     this.newPriceBreak = this.getEmptyBreak()
     this.emitUpdatedSchedule()
+  }
+
+  async savePriceBreakUpdate(): Promise<void> {
+    const updated = await this.middleware.updatePriceBreak(
+    this.priceScheduleEditable.ID,
+    this.priceScheduleEditable
+  );
+  this.priceScheduleEditable = updated;
+  this.priceScheduleEditable.PriceBreaks.sort((a, b) => a.Quantity - b.Quantity);
+  this.emitUpdatedSchedule();
+
   }
 
   handlePriceBreakErrors(priceBreaks: PriceBreak[]): boolean {

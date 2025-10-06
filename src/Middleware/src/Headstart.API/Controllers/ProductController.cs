@@ -71,11 +71,21 @@ namespace Headstart.Common.Controllers
 			return await _command.GetPricingOverride(id, buyerID, UserContext.AccessToken);
 		}
 
-		// todo add auth for seller user
-		/// <summary>
-		/// CREATE Product pricing override
-		/// </summary>
-		[HttpPost, Route("{id}/pricingoverride/buyer/{buyerID}"), OrderCloudUserAuth(ApiRole.ProductAdmin)]
+        // todo add auth for seller user
+        /// <summary>
+        /// POST Product price break update
+        /// </summary>
+        [HttpPost, Route("{id}/pricingoverride/pricebreak"), OrderCloudUserAuth(ApiRole.ProductAdmin)]
+        public async Task<PriceSchedule> PostPriceBreak(string id, [FromBody] PriceSchedule pb, string accessToken)
+        {
+			return await _command.PostPriceBreakOverride(id, pb, UserContext.AccessToken);
+        }
+
+        // todo add auth for seller user
+        /// <summary>
+        /// CREATE Product pricing override
+        /// </summary>
+        [HttpPost, Route("{id}/pricingoverride/buyer/{buyerID}"), OrderCloudUserAuth(ApiRole.ProductAdmin)]
 		public async Task<HSPriceSchedule> CreatePricingOverride(string id, string buyerID, [FromBody] HSPriceSchedule priceSchedule)
 		{
 			return await _command.CreatePricingOverride(id, buyerID, priceSchedule, UserContext.AccessToken);

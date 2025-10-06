@@ -7,7 +7,8 @@ import { Inject, Injectable } from '@angular/core'
 import { applicationConfiguration } from '@app-seller/config/app.config'
 import { AppConfig } from '@app-seller/models/environment.types'
 import { OrderType } from '@app-seller/shared'
-import { OcTokenService, Order } from '@ordercloud/angular-sdk'
+import { OcTokenService, Order, PriceBreak, PriceSchedule } from '@ordercloud/angular-sdk'
+import { AppAuthService } from '@app-seller/auth/services/app-auth.service'
 import {
   ListPage,
   BatchProcessResult,
@@ -27,10 +28,12 @@ export class MiddlewareAPIService {
     headers: new HttpHeaders({
       Authorization: `Bearer ${this.ocTokenService.GetAccess()}`,
     }),
+    
   }
   constructor(
     private ocTokenService: OcTokenService,
     private http: HttpClient,
+    private appAuthService: AppAuthService,
     @Inject(applicationConfiguration) private appConfig: AppConfig
   ) {}
 
@@ -88,5 +91,24 @@ export class MiddlewareAPIService {
       formData,
       { headers }
     )
+  }
+
+   async updatePriceBreak(
+    id: string, pb: PriceSchedule
+  ): Promise<any>{
+
+    const accessToken = await this.appAuthService.fetchToken().toPromise()
+     const headers = new HttpHeaders({
+        Authorization: `Bearer ${accessToken}`,
+      })
+    var url = this.appConfig.middlewareUrl + `/products/${id}/pricingoverride/pricebreak`;
+
+  try {
+    return await this.http.post(url, pb, {headers}).toPromise();
+  } catch (error) {
+    console.error('Error sending price break update:', error);
+    throw error;
+  }
+
   }
 }
