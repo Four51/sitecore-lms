@@ -1,24 +1,11 @@
-<div *ngIf="priceScheduleEditable" class="container-fluid mb-5">
+<div *ngIf="priceScheduleEditable" class="container-fluid mb-1 ">
   <div class="row pt-3">
     <div class="col-md-7" *ngIf="priceScheduleEditable?.PriceBreaks.length > 0">
       <table class="table">
         <thead class="bg-light">
           <tr>
             <th translate>ADMIN.PRODUCT_EDIT.QUANTITY</th>
-            <th translate>ADMIN.PRODUCT_EDIT.PRICE</th>
-            <th translate>
-              ADMIN.PRODUCT_EDIT.SALE_PRICE
-              <fa-icon
-                [icon]="faQuestionCircle"
-                autoClose="outside"
-                ngbPopover="{{
-                  'ADMIN.PRODUCT_EDIT.SALE_PRICE_POPOVER' | translate
-                }}"
-                triggers="hover"
-                #popover="ngbPopover"
-              >
-              </fa-icon>
-            </th>
+            <th translate >ADMIN.PRODUCT_EDIT.PRICE</th>
             <th></th>
           </tr>
         </thead>
@@ -29,60 +16,64 @@
               let i = index
             "
           >
-            <td>{{ getPriceBreakRange(i) }}</td>
-            <td>
+            <td class="pr-0 "><span class="pl-4 pt-4 mt-1">{{ getPriceBreakRange(i) }}</span></td>
+            <td class="pl-0 ">
               <div class="input-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text">{{ currency?.Symbol }}</span>
                 </div>
-                <input
-                  [attr.disabled]="readonly ? true : null"
+                <!-- <input
+               
                   type="number"
                   class="form-control currency"
                   [value]="priceBreak?.Price"
                   min="1"
-                  step="0.01"
+                  step="1"
                   (change)="updateExistingBreak($event, i, 'Price')"
                   placeholder="{{ 'ADMIN.PRODUCT_EDIT.PRICE' | translate }} ({{
                     currency?.Name
                   }})"
-                /><span class="required-field" *ngIf="isRequired">&nbsp;*</span>
-              </div>
-            </td>
-            <td>
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">{{ currency?.Symbol }}</span>
-                </div>
+                /> -->
                 <input
-                  [attr.disabled]="readonly ? true : null"
                   type="number"
                   class="form-control currency"
-                  [value]="priceBreak?.SalePrice"
+                  [(ngModel)]="priceScheduleEditable.PriceBreaks[i].Price"
+                  (blur)="updateExistingBreak(i)"
                   min="1"
-                  step="0.01"
-                  (change)="updateExistingBreak($event, i, 'SalePrice')"
-                  placeholder="{{
-                    'ADMIN.PRODUCT_EDIT.SALE_PRICE' | translate
-                  }} ({{ currency?.Name }})"
+                  step="1"
+                  placeholder="{{ 'ADMIN.PRODUCT_EDIT.PRICE' | translate }} ({{ currency?.Name }})"
                 />
               </div>
             </td>
-            <td>
-              <fa-icon
-                *ngIf="i !== 0 && !readonly"
-                (click)="deletePriceBreak(priceBreak)"
-                class="icon-button ripple hover-btn"
-                [icon]="faTrash"
-              ></fa-icon>
+          
+            <td colspan="3">
+              <button
+                type="button"
+                class="btn btn-primary"
+                (click)="savePriceBreakUpdate()"
+                translate
+              >
+                Save Price
+              </button>
             </td>
+            <!-- <td colspan="3">
+              <button
+                type="button"
+                class="w-100 btn btn-primary"
+                (click)="isAddingPriceBreak = true"
+                translate
+              >
+                ADMIN.PRODUCT_EDIT.ADD_NEW_BREAK
+              </button>
+            </td> -->
+          
           </tr>
-          <tr *ngIf="isAddingPriceBreak">
+          <!-- <tr *ngIf="isAddingPriceBreak">
             <td>
               <div class="form-group">
                 <div class="input-group">
                   <input
-                    [attr.disabled]="readonly ? true : null"
+
                     type="number"
                     class="form-control currency"
                     min="2"
@@ -102,7 +93,7 @@
                     <span class="input-group-text">{{ currency?.Symbol }}</span>
                   </div>
                   <input
-                    [attr.disabled]="readonly ? true : null"
+                
                     type="number"
                     class="form-control currency"
                     min="1"
@@ -115,15 +106,14 @@
                   />
                 </div>
               </div>
-            </td>
-            <td>
+            </td> -->
+            <!-- <td>
               <div class="form-group">
                 <div class="input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text">{{ currency?.Symbol }}</span>
                   </div>
                   <input
-                    [attr.disabled]="readonly ? true : null"
                     type="number"
                     class="form-control currency"
                     min="1"
@@ -144,25 +134,16 @@
                 (click)="addPriceBreak()"
                 translate
               >
-                ADMIN.PRODUCT_EDIT.ADD
+               Hello
               </button>
             </td>
-          </tr>
-          <tr *ngIf="!isAddingPriceBreak && !readonly">
-            <td colspan="3">
-              <button
-                type="button"
-                class="w-100 btn btn-primary"
-                (click)="isAddingPriceBreak = true"
-                translate
-              >
-                ADMIN.PRODUCT_EDIT.ADD_NEW_BREAK
-              </button>
-            </td>
-          </tr>
+            
+          </tr> -->
+          
+          
         </tbody>
       </table>
-      <div class="form-group mt-3">
+      <!-- <div class="form-group mt-3">
         <label for="UseCumulativeQuantity" translate
           >ADMIN.PRODUCT_EDIT.PRICE_BREAK_APPLICATION</label
         >
@@ -305,7 +286,7 @@
             </div>
           </div>
         </div>
-      </form>
+      </form> -->
     </div>
   </div>
 </div>

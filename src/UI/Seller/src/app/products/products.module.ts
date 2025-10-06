@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core'
 import { SharedModule } from '@app-seller/shared'
-
+import { FormsModule } from '@angular/forms';
 import { ProductsRoutingModule } from '@app-seller/products/products-routing.module'
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar'
 import { ProductTableComponent } from './components/product-table/product-table.component'
@@ -27,6 +27,7 @@ import { PriceDisplayComponent } from './components/price-display/price-display.
     PerfectScrollbarModule,
     NgbModule,
     NgbTooltipModule,
+    FormsModule,
   ],
   providers: [{ provide: NgbDateAdapter, useClass: NgbDateNativeAdapter }],
   declarations: [
