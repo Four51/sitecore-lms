@@ -1,0 +1,322 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'DM Sans', Arial, Helvetica, sans-serif;
+}
+.pagedesc_v5 {
+  margin-bottom: 10px; 
+  color: #001070;
+}
+.bigtext_v5 {
+  color: #1e1c22;
+  margin-bottom: 20px; 
+  margin-top: 50px;
+}
+
+.btn-grid_v5 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columns on wide screens */
+    gap: 30px;
+    align-items: stretch;
+    margin: 40px 40px;
+  }
+.btn-grid2_v5 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 4 columns on wide screens */
+    gap: 30px;
+    align-items: stretch;
+    margin: 20px 0px;
+  }
+  .btn_v5 {
+    padding: 10px 15px;
+    border: 1px solid #001070; ;
+    border-radius:0.2rem;
+    /*border-radius:0.2rem;*/
+    /*background-color: #ff1f38;  or #f44b6c */
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    transition: transform .08s ease, box-shadow .08s ease;
+    display: inline-flex;       /* flex container */
+    align-items: center;        /* vertical center */
+      /* horizontal center */
+    justify-content: space-between;;
+  }
+/* Button color */
+.topbtn_v5 { background-color: #001070; } /* Blue */
+.topbtn2_v5 { 
+    background: linear-gradient(90deg,rgba(235, 0, 26, 0.8),rgba(67, 0, 173, 0.8)); 
+    color:#fff; 
+    border: 1px solid #001070;
+    box-shadow: 10px 4px 12px rgba(0, 0, 0, 0.15);
+} 
+  .btn_v5:hover {
+    transform: scale(1.01);
+    background: linear-gradient(
+    90deg,
+    rgba(235, 0, 26, 0.8), /* red with 50% opacity */
+    rgba(67, 0, 173, 0.8)  /* purple with 50% opacity */
+)
+  }
+
+@media (max-width: 992px) {
+    .btn-grid_v5 { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* Small screens -> 1 column */
+  @media (max-width: 576px) {
+    .btn-grid_v5 { grid-template-columns: 1fr; gap: 10px; }
+    .btn_v5 { font-size: 15px; padding: 12px; }
+  }
+
+
+body {
+    background-color: #fef8fa;
+    line-height: 1.6;
+}
+a {
+  text-decoration: none;
+}
+/* Resources Section */
+.resources-section_v5 {
+    padding: 40px;
+    
+}
+
+
+/* Two-Column Layout */
+.resources-container_v5 {
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+    gap: 30px;
+    align-items: start;
+}
+
+/* Left Column */
+.resources-left_v5 h1 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #1e1c22;
+}
+
+
+.btn_v5 img {
+    width: 20px;
+    margin-right: 10px;
+}
+
+/* Services Cards */
+.services-cards_v5 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.card-wrapper_v5 {
+      margin-left: auto;
+    }
+
+/* Card Wrapper */
+.card-wrapper_v5 {
+    width: 100%;
+    max-width: 280px;
+    height: 380px;
+    position: relative;
+    border-radius: 0.2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    perspective: 1200px;
+    background: #fff;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  border: 1px solid #ccc; /* Add bottom border */
+  border-radius:0.2rem;
+}
+
+.card-wrapper_v5:hover {
+    transform: translateY(-5px);
+}
+
+/* Hide radios */
+.card-wrapper_v5 input[type="radio"] {
+    display: none;
+}
+
+/* Front Face */
+
+.card__header_v5 {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  margin-top: 0px;
+  margin-bottom: -0px;
+  height:160px;
+}
+
+.card__header_v5 img {
+
+  max-height: 100px;
+  object-fit: contain; /* keeps aspect ratio */
+}
+.title_v5 {
+  color: #1e1c22;
+}
+
+
+.card-front_v5 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+    border-radius:0.2rem;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    transition: transform 0.6s ease;
+    backface-visibility: hidden;
+    z-index: 2;
+}
+
+.card-front_v5 {
+    font-size: 1.3rem;
+    margin-bottom: 40px;
+    font-weight: bold;
+    
+}
+
+/* Buttons on front face */
+.card-front_v5 .menu_v5 {
+    
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  
+    border-top: 1px solid #ccc; /* Add bottom border */
+    padding-top:20px;
+  
+}
+
+.card-front_v5 .menu_v5 label {
+    background-color: #f1f0f3;
+    border: 1px solid #001070;
+    padding: 5px;
+    border-radius: 0.2rem;
+    text-align: center;
+    color: #001070;
+    font-size:16px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.card-front_v5 .menu_v5 label:hover {
+  color: #fff;
+  background: #746f7b;
+}
+
+/* Back Panels */
+.card-panel_v5 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+    background: linear-gradient(51deg, #dedbff -10%, #f9f9f9 40%, #f9f9f9 70%, #ffcfcf 120%);
+    border-radius: 0px;
+    transform: rotateY(180deg);
+    opacity: 0;
+    transition: transform 0.6s ease, opacity 0.3s ease;
+    backface-visibility: hidden;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+  overflow-y: auto;
+}
+
+/* Pills */
+.pill-row_v5 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.0rem;
+    background-color: #333;
+    padding: 0.3rem;
+    border-radius: 0px;
+}
+
+.pill_v5 {
+    padding: 0.3rem 0.7rem;
+    font-size: 0.8rem;
+    background-color: #e0e0e0;
+    border-radius: 0px 0px 10px 0px;
+    color: #333;
+}
+
+/* Links */
+.card-panel_v5 .link-label_v5 {
+    display: block;
+    padding: 5px 5px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    color: #333;
+    border: 1.5px solid #333;
+    border-radius: 0px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    text-align: left;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    text-decoration: none;
+}
+
+.card-panel_v5 .link-label_v5:hover {
+    background-color: #746f7b;
+    color: #fff;
+}
+
+/* Back Button */
+.back-circle_v5 {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    width: 40px;
+    height: 40px;
+    background: #0077cc;
+    color: white;
+    font-size: 20px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.back-circle_v5:hover {
+    background: #005fa3;
+}
+
+/* Responsive */
+@media screen and (max-width: 991px) {
+    .resources-container_v5 {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .resources-left_v5,
+    .resources-section_v5,
+    .resources-right_v5 {
+        text-align: center;
+        align-items: center;
+    }
+}
+ .back-circle_v5:hover { background: #005fa3; } /* Flip animation selectors */ #tab-dev1:checked ~ .panel-dev_v5, #tab-bus1:checked ~ .panel-bus_v5, #tab-admin1:checked ~ .panel-admin_v5, #tab-dev2:checked ~ .panel-dev_v5, #tab-bus2:checked ~ .panel-bus_v5, #tab-admin2:checked ~ .panel-admin_v5, #tab-dev3:checked ~ .panel-dev_v5, #tab-bus3:checked ~ .panel-bus_v5, #tab-admin3:checked ~ .panel-admin_v5, #tab-dev4:checked ~ .panel-dev_v5, #tab-bus4:checked ~ .panel-bus_v5, #tab-admin4:checked ~ .panel-admin_v5, #tab-dev5:checked ~ .panel-dev_v5, #tab-bus5:checked ~ .panel-bus_v5, #tab-admin5:checked ~ .panel-admin_v5, #tab-dev6:checked ~ .panel-dev_v5, #tab-bus6:checked ~ .panel-bus_v5, #tab-admin6:checked ~ .panel-admin_v5 { transform: rotateY(0deg); opacity: 1; z-index: 3; } #tab-dev1:checked ~ .card-front_v5, #tab-bus1:checked ~ .card-front_v5, #tab-admin1:checked ~ .card-front_v5, #tab-dev2:checked ~ .card-front_v5, #tab-bus2:checked ~ .card-front_v5, #tab-admin2:checked ~ .card-front_v5, #tab-dev3:checked ~ .card-front_v5, #tab-bus3:checked ~ .card-front_v5, #tab-admin3:checked ~ .card-front_v5, #tab-dev4:checked ~ .card-front_v5, #tab-bus4:checked ~ .card-front_v5, #tab-admin4:checked ~ .card-front_v5, #tab-dev5:checked ~ .card-front_v5, #tab-bus5:checked ~ .card-front_v5, #tab-admin5:checked ~ .card-front_v5, #tab-dev6:checked ~ .card-front_v5, #tab-bus6:checked ~ .card-front_v5, #tab-admin6:checked ~ .card-front_v5 { transform: rotateY(180deg); opacity: 0; }
