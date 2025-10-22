@@ -65,11 +65,20 @@
 
 @media (max-width: 992px) {
     .btn-grid_v5 { grid-template-columns: repeat(2, 1fr); }
+    .resources-left_v5,
+    .resources-section_v5,
+    .resources-right_v5 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    }
   }
 
   /* Small screens -> 1 column */
-  @media (max-width: 576px) {
+ @media (max-width: 576px) {
     .btn-grid_v5 { grid-template-columns: 1fr; gap: 10px; }
+    .btn-grid2_v5 { grid-template-columns: 1fr; gap: 10px; }
     .btn_v5 { font-size: 15px; padding: 12px; }
   }
 
@@ -113,7 +122,7 @@ a {
 /* Services Cards */
 .services-cards_v5 {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 20px;
 }
 
@@ -320,3 +329,8 @@ a {
     }
 }
  .back-circle_v5:hover { background: #005fa3; } /* Flip animation selectors */ #tab-dev1:checked ~ .panel-dev_v5, #tab-bus1:checked ~ .panel-bus_v5, #tab-admin1:checked ~ .panel-admin_v5, #tab-dev2:checked ~ .panel-dev_v5, #tab-bus2:checked ~ .panel-bus_v5, #tab-admin2:checked ~ .panel-admin_v5, #tab-dev3:checked ~ .panel-dev_v5, #tab-bus3:checked ~ .panel-bus_v5, #tab-admin3:checked ~ .panel-admin_v5, #tab-dev4:checked ~ .panel-dev_v5, #tab-bus4:checked ~ .panel-bus_v5, #tab-admin4:checked ~ .panel-admin_v5, #tab-dev5:checked ~ .panel-dev_v5, #tab-bus5:checked ~ .panel-bus_v5, #tab-admin5:checked ~ .panel-admin_v5, #tab-dev6:checked ~ .panel-dev_v5, #tab-bus6:checked ~ .panel-bus_v5, #tab-admin6:checked ~ .panel-admin_v5 { transform: rotateY(0deg); opacity: 1; z-index: 3; } #tab-dev1:checked ~ .card-front_v5, #tab-bus1:checked ~ .card-front_v5, #tab-admin1:checked ~ .card-front_v5, #tab-dev2:checked ~ .card-front_v5, #tab-bus2:checked ~ .card-front_v5, #tab-admin2:checked ~ .card-front_v5, #tab-dev3:checked ~ .card-front_v5, #tab-bus3:checked ~ .card-front_v5, #tab-admin3:checked ~ .card-front_v5, #tab-dev4:checked ~ .card-front_v5, #tab-bus4:checked ~ .card-front_v5, #tab-admin4:checked ~ .card-front_v5, #tab-dev5:checked ~ .card-front_v5, #tab-bus5:checked ~ .card-front_v5, #tab-admin5:checked ~ .card-front_v5, #tab-dev6:checked ~ .card-front_v5, #tab-bus6:checked ~ .card-front_v5, #tab-admin6:checked ~ .card-front_v5 { transform: rotateY(180deg); opacity: 0; }
+
+ .page-container {
+  max-width: 1240px;
+  margin: 0 auto;
+}
