@@ -173,10 +173,11 @@ a {
   max-height: 100px;
   object-fit: contain; /* keeps aspect ratio */
 }
-.title_v5 {
-  color: #1e1c22;
-}
 
+.title_v5[_ngcontent-cps-c252] {
+    color: #1e1c22;
+    font-size: 1.3rem;
+}
 
 .card-front_v5 {
     position: absolute;
