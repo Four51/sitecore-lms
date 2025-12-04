@@ -94,7 +94,7 @@ export class OCMFacetMultiSelect implements OnDestroy {
         return 'Personalize'
         break
       case 'xm cloud':
-        return 'XM Cloud'
+        return 'SitecoreAI'
         break
       default:
         return label
