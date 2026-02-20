@@ -7,7 +7,7 @@ jobs:
 
   - job: Build_MiddleWare
     pool:
-      vmImage: windows-2019
+      vmImage: windows-2022
     displayName: Build Middleware
     steps:
       - checkout: self
@@ -68,7 +68,7 @@ jobs:
           ArtifactName: jobs
   - job: Build_Buyer
     pool:
-        vmImage: windows-2019
+        vmImage: windows-2022
     displayName: Build Buyer
     steps:
     - task: NodeTool@0
@@ -119,7 +119,7 @@ jobs:
         ArtifactName: buyer
   - job: Build_Seller
     pool:
-          vmImage: windows-2019
+          vmImage: windows-2022
     displayName: Build Seller
     steps:
     - task: NodeTool@0
