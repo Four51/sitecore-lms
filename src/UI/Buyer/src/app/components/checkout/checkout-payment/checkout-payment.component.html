@@ -98,7 +98,8 @@
     *ngIf="
       orderSummaryMeta.LineItemCount &&
       selectedPaymentMethod === 'PurchaseOrder' &&
-      !isSitecorian
+      !isSitecorian &&
+      orderSummaryMeta.OrderTotal !== 0
     "
   >
     <label for="ponumber">Purchase Order Upload (PDF)</label>
@@ -203,7 +204,9 @@
     class="btn btn-primary btn-block-xs mt-4 mr-2"
     [disabled]="
       !selectedBillingAddress ||
-      (poUploadSuccess === false && !isSitecorian)
+      (poUploadSuccess === false &&
+        !isSitecorian &&
+        orderSummaryMeta.OrderTotal !== 0)
     "
   >
     Submit Order
