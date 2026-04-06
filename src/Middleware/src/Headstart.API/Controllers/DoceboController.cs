@@ -24,20 +24,12 @@ namespace Headstart.API.Controllers
         /// <summary>
         /// POST PaymentIntentResponse
         /// </summary>
-        [HttpPost, Route("posttoken"), OrderCloudUserAuth(ApiRole.Shopper)]
-        public async Task<DoceboToken> Post([FromBody] DoceboToken request)
-        {
-            return await _docebo.GetToken();
-        }
+        //[HttpPost, Route("posttoken"), OrderCloudUserAuth(ApiRole.Shopper)]
+        //public async Task<DoceboToken> Post([FromBody] DoceboToken request)
+        //{
+        //    return await _docebo.GetToken();
+        //}
 
-        /// <summary>
-        /// GET Docebo Token For Local Testing Only
-        /// </summary>
-        [HttpGet, Route("gettoken")]
-        public async Task<DoceboToken> GetToken()
-        {
-            return await _docebo.GetToken();
-        }
 
         /// <summary>
         /// LIST users from Docebo
