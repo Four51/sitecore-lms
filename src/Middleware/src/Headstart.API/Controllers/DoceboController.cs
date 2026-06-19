@@ -1,11 +1,13 @@
-﻿using System.Threading.Tasks;
-using Headstart.Models.Attributes;
+﻿using Headstart.Models.Attributes;
 using Microsoft.AspNetCore.Mvc;
 using ordercloud.integrations.docebo;
+using ordercloud.integrations.docebo.Models;
 using ordercloud.integrations.library;
 using OrderCloud.Catalyst;
 using OrderCloud.SDK;
-using ordercloud.integrations.docebo.Models;
+using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace Headstart.API.Controllers
 {
@@ -16,9 +18,11 @@ namespace Headstart.API.Controllers
     public class DoceboController : CatalystController
     {
         private readonly IOrderCloudIntegrationsDoceboService _docebo;
-        public DoceboController(IOrderCloudIntegrationsDoceboService docebo)
+        private readonly IOrderCloudClient _oc;
+        public DoceboController(IOrderCloudIntegrationsDoceboService docebo, IOrderCloudClient oc)
         {
             _docebo = docebo;
+            _oc = oc;
         }
 
         /// <summary>
@@ -30,14 +34,27 @@ namespace Headstart.API.Controllers
         //    return await _docebo.GetToken();
         //}
 
-
         /// <summary>
-        /// LIST users from Docebo
+        /// Returns whether a Docebo account exists for the given email.
+        /// No PII is included in the response.
         /// </summary>
         [HttpGet, Route("{email}"), OrderCloudUserAuth(ApiRole.Shopper)]
-        public async Task<DoceboUserSearchResponse> ListDoceboUsers(string email)
+        public async Task<DoceboUserExistsResponse> ListDoceboUsers(string email)
         {
-            return await _docebo.SearchUsers(email);
+            var currentUser = await _oc.Me.GetAsync(accessToken: UserContext.AccessToken);
+            var callerDomain = currentUser.Email.Split('@').Last();
+            var requestedDomain = email.Split('@').Last();
+
+            Require.That(
+                callerDomain.Equals(requestedDomain, System.StringComparison.OrdinalIgnoreCase),
+                new ErrorCode("Insufficient Access", "You may only search for users within your own email domain.", HttpStatusCode.Forbidden)
+            );
+
+            var result = await _docebo.SearchUsers(email);
+            return new DoceboUserExistsResponse
+            {
+                exists = result?.data?.items?.Any() ?? false
+            };
         }
     }
 }

@@ -1,4 +1,4 @@
-import { DoceboUserSearchResponse } from '../models/DoceboUserSearchResponse';
+import { DoceboUserExistsResponse, DoceboUserSearchResponse } from '../models/DoceboUserSearchResponse';
 import { RequiredDeep } from '../models/RequiredDeep';
 import httpClient from '../utils/HttpClient';
 
@@ -17,7 +17,7 @@ export default class DoceboUsers {
     * @param email Email of the learner
     * @param accessToken Provide an alternative token to the one stored in the sdk instance (useful for impersonation).
     */
-    public async SearchUsers(email: string,  accessToken?: string ): Promise<RequiredDeep<DoceboUserSearchResponse>> {
+    public async SearchUsers(email: string,  accessToken?: string ): Promise<RequiredDeep<DoceboUserExistsResponse>> {
         const impersonating = this.impersonating;
         this.impersonating = false;
         return await httpClient.get(`/docebo/${email}`, { params: {  accessToken, impersonating } } );

@@ -114,7 +114,7 @@ export class OCMCart implements OnInit, OnDestroy {
         const searchResult = await this.context.order.searchDoceboUsers(email)
         const result = {
           learner: email,
-          found: searchResult.data.count > 0 ? true : false,
+          found: searchResult,
         }
         return result
       })
