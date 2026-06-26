@@ -43,7 +43,7 @@ export class HasTokenGuard implements CanActivate, CanActivateChild {
         this.tokenHelper.removeProductCookie()
         this.router.navigate([`/products/${productID}`], { queryParams })
       } else {
-        this.router.navigate(['/products'], { queryParams })
+        this.router.navigate(['/home'], { queryParams })
       }
       return true
     }
