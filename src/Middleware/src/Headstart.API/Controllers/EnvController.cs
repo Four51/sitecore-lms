@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OrderCloud.Catalyst;
+using OrderCloud.SDK;
 
 namespace Headstart.Common.Controllers
 {
@@ -12,7 +14,7 @@ namespace Headstart.Common.Controllers
             _settings = settings;
         }
 
-        [HttpGet]
+        [HttpGet, OrderCloudUserAuth(ApiRole.IntegrationEventAdmin)]
         public object Get()
         {
             return new { 
